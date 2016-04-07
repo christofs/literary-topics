@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- CUSTOMIZE THIS! -->
-<title>Topic Modeling Tutorial</title>
+<title>What are literary topics, really?</title>
 <meta name="author" content="Christof Schöch">
 <!-- END -->
 <meta name="description" content="Slides">
@@ -35,11 +35,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-# Topic Modeling Tutorial: Theory and Praxis
+# What Are Literary Topics, Really?
 <hr/>
 <br/>
-<p>Erasmus+ Workshop</p>
-<p>Kraków, March/April 2016</p>
+<p>Digital Humanities Lunch</p>
+<p>Institute for Polish Language, Kraków, April 8, 2016</p>
 <br/>
 <hr/>
 <p>Christof Schöch<br/>(CLiGS, University of Würzburg)</p>
@@ -50,247 +50,74 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## Overview
-<font color="grey">
-
-1. What is Topic Modeling? (theory)
-    * How does a topic model look like?
-    * How do we arrive at such a model?
-2. Visualising Topics
-    * Individual topics
-    * Topic distributions
-</font>
-3. Doing Topic Modeling (hands-on)
-    * Fundamentals 
-    * The details
-    * Practice
-    * Using tmw
-
+1. Topics in Topic Modeling
+2. A typology of topics
+3. Reasons
+4. Consequences
+5. Analysis
+6. Conclusion
 </script>
 </section>
+
 
 <section>
 
 <section data-markdown>
 <script type="text/template">
-# 1. What is Topic Modeling?
+# 1. Topics in Topic Modeling
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Topic Modeling: basic idea
-* Works on the basis of (large) collections of documents <!-- .element: class="fragment" data-fragment-index="1" -->
-* The purpose is to discover thematic trends and patterns <!-- .element: class="fragment" data-fragment-index="2" -->
-* Each document is understood as a mixture of topics <!-- .element: class="fragment" data-fragment-index="3" -->
-* Discovered through generative probabilistic modeling <!-- .element: class="fragment" data-fragment-index="4" -->
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-# (a) How does a topic model look like?
+## What was topic modeling again?
+* A method of discovering the latent semantic structure of large collections of texts <!-- .element: class="fragment" data-fragment-index="2" -->
+* Unsupervised, language-independent, based on distributional semantics <!-- .element: class="fragment" data-fragment-index="2" -->
+* A topic model describes a set of topics with their words and their distribution in the collection <!-- .element: class="fragment" data-fragment-index="3" -->
+* Useful e.g. for resource discovery, recommender systems and thematic analysis <!-- .element: class="fragment" data-fragment-index="4" -->
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Words, Topics, Documents
-<p><img height="500" data-src="img/tm_blei.png"></img></p>
-<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## On a practival level
-* A topic is a group of words with some semantic relation (e.g., common theme) <!-- .element: class="fragment" data-fragment-index="1" -->
-* Each topic is made up of words of varying importance and relevance to the topic <!-- .element: class="fragment" data-fragment-index="2" -->
-* Each document is made up of several topics in various proportions <!-- .element: class="fragment" data-fragment-index="3" -->
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## On a technical level
-* A topic model is an abstract representation of topics and documents <!-- .element: class="fragment" data-fragment-index="1" -->
-* A topic is a probability distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
-* A document is a probability distribution over topics <!-- .element: class="fragment" data-fragment-index="3" -->
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## The model: topics
-<p><img height="400" data-src="img/word-scores-in-topics.png"></img></p>
-<p>(Each word has a score in each topic; shown by rank)
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## The model: documents
-<p><img height="400" data-src="img/docs-and-topics-in-rank.png"></img></p>
-<p>(Each topic has a score in each document; shown by rank)
-</script>
-</section>
-
-
-<!--
-<section data-markdown>
-<script type="text/template">
-## The model: overview
-<p><img height="400" data-src="img/topic-score-words-in-rank.png"></img></p>
-<p>(Each topic has a collection-wide score and top-words)
-</script>
-</section>
--->
-
-<section data-markdown>
-<script type="text/template">
-## (b) How do we arrive at a topic model?
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Some relevant ideas
-* The most widespread implementation uses 'Latent Dirichlet Allocation'
-* Follows the "bag-of-words"-model: word order is irrelevant <!-- .element: class="fragment" data-fragment-index="1" -->
-* No semantic knowledge / dictionary / WordNet etc. is used; language-independent <!-- .element: class="fragment" data-fragment-index="2" -->
-* Based distributional semantics: "a word is characterized by the company it keeps" (John Firth 1957) <!-- .element: class="fragment" data-fragment-index="3" -->
-* Discovers words which frequently occur together or in similar contexts (=topics)  <!-- .element: class="fragment" data-fragment-index="4" -->
-* Infers how important each word is in each topic <!-- .element: class="fragment" data-fragment-index="5" -->
-* Infers how important each topic is in each document <!-- .element: class="fragment" data-fragment-index="6" -->
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Generative, inverted, iterative
+## What are topics? (Blei)
 <br/>
->"A topic model is a generative model for documents: it specifies a simple probabilistic procedure by which documents
-can be generated. To make a new document, one chooses a distribution over topics. Then, for each word in that
-document, one chooses a topic at random according to this distribution, and draws a word from that topic. Standard
-statistical techniques can be used to invert this process, inferring the set of topics that were responsible for
-generating a collection of documents."
+
+>"We formally define a topic to be a distribution over a fixed vocabulary."
+
+>"Probabilistic topic models are a suite of algorithms whose aim is to discover the hidden thematic structure in large archives of documents."
+
+>"A topic model [...] discovers a set of “topics” — recurring themes that are discussed in the collection — and the degree to which each document exhibits those topics." 
 
 <br/>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
+<p>David Blei 2012 (Computer Scientist)</p> 
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Topic Modeling as 'reverse engineering'
-* Example from software development: Analyse a piece of proprietary software, discover how its (hidden) code-base is structured, and implement an open-source clone with similar functionality as the original  <!-- .element: class="fragment" data-fragment-index="1" -->
-* By analogy: By analysing a collection of documents, discover its (latent) thematic structure and based on this, engineer a model that can generate documents with the same themes    <!-- .element: class="fragment" data-fragment-index="2" -->
-</script>
-</section>
+## What are topics? (Weingart)
+<br/>
 
+>"Topic modeling yields intuitive results, generating what really feels like topics as we know them<sup>3</sup>, with virtually no effort on the human side." 
 
-<section data-markdown>
-<script type="text/template">
-## Generative, inverted, iterative
-<p><img height="500" data-src="img/tm_steyvers1.png"></img></p>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Generative, inverted, iterative
-<p><img height="500" data-src="img/tm_steyvers2.png"></img></p>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Words, Topics, Documents
->"The computational problem of inferring the hidden topic structure from the documents is the problem of computing the posterior distribution, the conditional distribution of the hidden variables given the documents."
+><sup>3</sup>They’re not, of course. We’ll worry about that later."
 
 <br/>
-<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-</script>
-</section>
-
-
-
-
-<section data-markdown>
-<script type="text/template">
-## The process of LDA: starting point
-* We have the documents with their words (e.g. as a word/document frequency matrix)  <!-- .element: class="fragment" data-fragment-index="1" -->
-* We are looking for the word distributions per topic and the topic distributions per document   <!-- .element: class="fragment" data-fragment-index="2" -->
-* Both distributions are dependent on each other (if a topic changes, the topic distributions change)  <!-- .element: class="fragment" data-fragment-index="3" -->
-* And both distributions need to fit with the original documents  <!-- .element: class="fragment" data-fragment-index="4" -->
+<p>Scott Weingart (Historian of Science)</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## The process of LDA: generative
-* For each topic:  <!-- .element: class="fragment" data-fragment-index="1" -->
-    * There is a distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
-* For each document:  <!-- .element: class="fragment" data-fragment-index="3" -->
-    * There is a distribution over topics <!-- .element: class="fragment" data-fragment-index="4" -->
-    * For each word in the document:  <!-- .element: class="fragment" data-fragment-index="5" -->
-        * We sample a word from the word distribution of that topic. <!-- .element: class="fragment" data-fragment-index="6" -->
-        * Once all words are chosen, the document is finished <!-- .element: class="fragment" data-fragment-index="7" -->
-* (This only works if we already have the distributions) <!-- .element: class="fragment" data-fragment-index="8" -->
-</script>
-</section>
+## What are topics? (Underwood)
+<br/>
+>"[...] I also said that I thought “topic” was not always the right word to use for the categories that are produced by topic modeling. I suggested that “discourse” might be better, because topics are not always unified semantically. [...] I’m making a claim that runs against the grain of a lot of existing discussion about “topic modeling.” The computer scientists who invented this technique certainly thought they were designing it to identify semantically coherent “topics.” If I’m not doing that, then, frankly, am I using it right?"
 
-<section data-markdown>
-<script type="text/template">
-## The process of LDA: probabilistic
-* For each topic:  <!-- .element: class="fragment" data-fragment-index="1" -->
-    * Generate a random distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
-* For each document:  <!-- .element: class="fragment" data-fragment-index="3" -->
-    * Generate a random distribution over topics <!-- .element: class="fragment" data-fragment-index="4" -->
-    * For each word in the document:  <!-- .element: class="fragment" data-fragment-index="5" -->
-        * Choose a topic from the topic distribution <!-- .element: class="fragment" data-fragment-index="6" -->
-        * Choose a word by sampling from the word distribution of that topic. <!-- .element: class="fragment" data-fragment-index="7" -->
-        * Once all words are chosen, the document is finished <!-- .element: class="fragment" data-fragment-index="8" -->
-* (Now we have random topic and document distributions; they don't match the real documents) <!-- .element: class="fragment" data-fragment-index="9" -->
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## The process of LDA: sampling
-* We have: <!-- .element: class="fragment" data-fragment-index="1" -->
-    * the observed words in each document <!-- .element: class="fragment" data-fragment-index="1" -->
-    * the words in each randomly generated document <!-- .element: class="fragment" data-fragment-index="1" -->
-    * the (random) words-in-topics distribution <!-- .element: class="fragment" data-fragment-index="1" -->
-    * the (random) topics-in-documents distribution <!-- .element: class="fragment" data-fragment-index="1" -->
-* Now we can iteratively model all these three together as a "joint distribution" (e.g. with Gibbs sampling): <!-- .element: class="fragment" data-fragment-index="2" -->
-    * Generate documents <!-- .element: class="fragment" data-fragment-index="3" -->
-    * Compare with the real documents <!-- .element: class="fragment" data-fragment-index="4" -->
-    * Optimize the distributions / latent variables <!-- .element: class="fragment" data-fragment-index="5" -->
-* Do this until there is a sufficiently good approximation <!-- .element: class="fragment" data-fragment-index="6" -->
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## How it works exactly, clearly explained
-<p><img height="600" data-src="img/sharris_more-explicit-in-step-two.jpg"></img></p>  <!-- .element: class="fragment" data-fragment-index="1" -->
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Topic modeling: geometric interpretation
-<p><img height="500" data-src="img/steyvers_geometric-interpretation-of-the-topic-model.png"></img></p>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
+<br>
+<p>Ted Underwood 2012 (Literary Historian)</p>
 </script>
 </section>
 
@@ -298,492 +125,288 @@ generating a collection of documents."
 
 <section data-markdown>
 <script type="text/template">
-## Latent Dirichlet Allocation: plate notation
-<p><img height="500" data-src="img/steyvers_topic-modeling-plate-notation.png"></img></p>
-<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
-</script>
-</section>
-
-
-
-<!--
-<section data-markdown>
-<script type="text/template">
-## Latent Dirichlet Allocation: plate notation
-<p><img height="400" data-src="img/wikipedia_topic-modeling-plate-notation_legend.png"></img></p>
-<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
-</script>
-</section>
--->
-
-
-
-<section data-markdown>
-<script type="text/template">
-## Latent Dirichlet Allocation: plate notation
-* D = number of documents (given)
-* T = number of topics (set by researcher)
-* Nd = number of words in document d
-* α (alpha): Dirichlet prior (hyperparameter: sparse / smooth distribution of topics)
-* β (beta): Dirichlet prior (hyperparameter: sparse / smooth distribution of words)
-* θ (theta): distribution over topics (for each document; latent variable)
-* ϕ (phi): distribution over words (for each topic; latent variable) 
-* z = assignment of words to topics (latent variable)
-* w = words in a document (observed variable)
-</script>
-</section>
-
-
-
-</section>
-<section>
-
-
-<section data-markdown>
-<script type="text/template">
-# 2. Results: Visualizing topics
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## 2.1 Individual Topics
+## My take on topics
+* In most cases, topics do show some sort of semantic relation between the words comprising them <!-- .element: class="fragment" data-fragment-index="1" -->
+* However, this semantic relation is not limited to a shared abstract theme <!-- .element: class="fragment" data-fragment-index="2" -->
+* Rather, there are several types of topics, some thematic, some non-thematic <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Text collection: 840 French novels
-<img height="500" data-src="img/textsammlung.png"></img>
-</script>
-</section>
+## Why is it a problem?
+<br/>
 
+>"Three topics are excluded, all of which struck me as less than substantive: one consisted of articles that listed lots of place, another that listed lots of people, and a third that simply seemed remarkably incoherent."
 
-<section data-markdown>
-<script type="text/template">
-## A topic as a wordcloud
-<img height="500" data-src="img/wordle_tp092x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Money-coin-franc
-<img height="500" data-src="img/wordle_tp028x.png"></img>
+<br/>
+<p>Robert K. Nelson</p>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## professor-science-savant
-<img height="500" data-src="img/wordle_tp011x.png"></img>
+## Why is it a problem?
+<br/>
+>"As a next step in preprocessing, therefore, I employ Part-of-Speech tagging or “POS-Tagging” in order to identify and ultimately “stop out” all of the words that are not nouns! Since I can already hear my friend Ted Underwood screaming about “discourses,” let me justify this suggestion with a small but important caveat: I think this is a good way to capture thematic information; it certainly does not capture such things as affect (i.e. attitudes towards the theme) or other nuances that may be very important to literary analysis and interpretation."
+
+<br/>
+<p>Matt Jockers (literary historian)</p>
 </script>
 </section>
-
-<section data-markdown>
-<script type="text/template">
-## crime-death-murder
-<img height="500" data-src="img/wordle_tp002x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## music-piano-song
-<img height="500" data-src="img/wordle_tp048x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## book-library-page
-<img height="500" data-src="img/wordle_tp041x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## car-street-driver
-<img height="500" data-src="img/wordle_tp061x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## animal-beast-lion
-<img height="500" data-src="img/wordle_tp075x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## 2.1 Topic distributions</h2>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics / subgenre heatmap
-<img height="500" data-src="img/topic-doc-matrix.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics over decades
-<img height="500" data-src="img/lineplot-3-227.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics and authors: single topics
-<img height="500" data-src="img/tI_by-author-name-003.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics and authors: clustering
-<img height="500" data-src="img/item-clustering_author-name_cosine-weighted-mean-50topics.jpg"></img>
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Text collection: 127 Spanish novels
-<img height="500" data-src="img/textsammlung_ES.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topic / genre heatmap
-<img height="500" data-src="img/topic-genre-heatmap.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topics over text progression
-<img height="500" data-src="img/topics_fallend.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topics over text progression
-<img height="500" data-src="img/topics_ansteigend.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topics by genre and text progression
-<img height="500" data-src="img/textverlauf-untergattung.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topic-work bimodal network
-<img height="500" data-src="img/author-topic-map_full.jpg"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topic-work bimodal network (detail)
-<img height="500" data-src="img/author-topic-map_sub-neopolar.jpg"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topic clustering
-<img height="500" data-src="img/topic-clustering_cosine-weighted-50words.png"></img>
-<p>(top 50 topics, cosine/weighted)</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## topic clustering (detail)
-<img height="500" data-src="img/topic-clustering_cosine-weighted-50words_3-227.png"></img>
-<p>(top 50 topics, cosine/weighted)</p>
-</script>
-</section>
-
-
-
 
 </section>
 <section>
 
 <section data-markdown>
 <script type="text/template">
-# 3. Hands-on with Mallet
+# 2. A typology of topics
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Data: French and English novels
+<br/>
+<table style="width:100%">
+ <tr>
+  <td><strong>Language</strong></td>
+  <td><strong>Genre</strong></td>
+  <td><strong>Period</strong></td>
+  <td><strong>Number</strong></td>
+  <td><strong>Size</strong></td>
+ </tr>
+ <tr>
+  <td>English</td>
+  <td>Novel</td>
+  <td>1780-2000</td>
+  <td>507</td>
+  <td>330MB</td>
+</tr>
+ <tr>
+  <td>French</td>
+  <td>Novel</td>
+  <td>1850-2000</td>
+  <td>740</td>
+  <td>360MB</td>
+</tr>
+</table> 
+<p>Modeling parameters: segments of 1000 words; lemmatisation; selection of nouns resp. nouns, verbs and adjectives; short stoplist)</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Types of topics: requirements
+* Types should not be defined based on meaning (not, e.g.: nature vs. culture topics)
+* Types should not be defined based on word categories (not, e.g. noun vs. verb topics
+* A useful basis could be the narrative function of the topics
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Types of topics
+* Descriptive / referential topics
+    * Setting description (interiors, exteriors, landscapes) 
+    * Describing characters (physical appearance: body, clothes)
+    * Naming personnel (relational terms; character names)
+* Narrative topics
+    * Narrative motives (recurring narrative elements)
+* Argumentative topics
+    * Abstract themes (political, philosophical) 
+    * Meta-motives (arts, writing, story-telling)
+* Discourse-topics
+    * Language use (register, sociolect, dialect, foreign language)
+    * ?Rhetoric devices
+* Other types
+    * time
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## 3.1 Fundamentals
+## Type: personnel
+* Words describing characters in a functional or relational way (not just character names)
+* E.g. family members, social rank terms, professional types, etc.
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: personnel (fr)
+<img height="500" data-src="img/wordle-fr_tp196.png">
+<p>bishop, sire, serf</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: Personnel (en)
+<img height="500" data-src="img/wordle-en_tp000.png">
+<p>family, father, son</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Type: setting
+* Words describing fictional spaces in which events take place
+* E.g. interiors, exteriors, landscapes
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: setting (fr)
+<img height="500" data-src="img/wordle-fr_tp162.png">
+<p>bed, room, table</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: setting (en)
+<img height="500" data-src="img/wordle-en_tp008.png">
+<p>street, shop, town</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Type: narrative motive
+* Words used to describe some typical sequence of events in a given setting
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: Narrative motive (fr)
+<img height="500" data-src="img/wordle-fr_tp131.png">
+<p>doctor, doctor, sickness</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: Narrative motive (en)
+<img height="500" data-src="img/wordle-en_tp026.png">
+<p>read, letter, write, paper</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Mallet: the heart of topic modeling
-* Preprocessing is done elsewhere (eg., with tmw)
-* Postprocessing and visualisation is done elsewhere (eg., with tmw)
-* Mallet imports texts and builds the topic model (and does it really well)
-* Attention! Mallet is operated from the command line
-* Find help: <http://mallet.cs.umass.edu/topics.php>
+## Type: abstract theme
+* Words used to discuss some philosophical, political or social theme
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: abstract theme (fr)
+<img height="500" data-src="img/wordle-fr_tp147.png">
+<p>memory, past, dream</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: abstract theme (en)
+<img height="500" data-src="img/wordle-en_tp010.png">
+<p>country, people, government</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Mallet: prerequisites
-* A working directory, with: 
-   * An input data folder: texts in plain text, one file per text
-   * Optionally: a plain text file with stopwords
-   * Optionally: a dedicated output folder
+## Type: physical description
+* Words used to describe the body and/or clothes of a person
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Folder structure
-* /krakow-mallet/ 
-   * data/
-       * docs-all/
-       * segs-all/
-       * segs-nouns/
-       * stopwords/
-   * models/
-       * docs-all/
-       * segs-all/
-       * segs-nouns
+## Example: physical description (fr)
+<img height="500" data-src="img/wordle-fr_tp114.png">
+<p>leg, foot, body</p>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Calling Mallet: two steps
-* "import"
-    * Converts the text files into the Mallet corpus format
-    * Writes a binary file
-* "train-topics"
-    * Performs the actual modeling on the corpus
-    * Writes several tabular files
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## 3.2 The details
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## (1) Importing texts into Mallet
-* tell the computer to use Mallet
-* tell Mallet to import texts
-* ...where the text files are
-* ...where to save the corpus to
-* Optionally: ...how to tokenize the texts
-* Optionally: ...whether to use stopwords, and which stoplist to use
+## Example: physical description (en)
+<img height="500" data-src="img/wordle-en_tp028.png">
+<p>wear, hat, dress, black, white</p>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Importing texts into Mallet (Linux)
-```
-/home/[USER]/Programs/Mallet/bin/mallet 
-import-dir 
---input /home/[USER]/Desktop/krakow-mallet/data/docs-all  
---output /home/[USER]/Desktop/krakow-mallet/data/docs-all.mallet
---keep-sequence  --token-regex '\p{L}[\p{L}\p{P}]*\p{L}' 
---remove-stopwords TRUE
---stoplist-file /home/[USER]/Desktop/krakow-mallet/data/stopwords/doyle_100.txt
-```
+## Type: language use
+* Words belonging to a certain register, sociolect, dialect or another language
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: language use (fr)
+<img height="500" data-src="img/wordle-fr_tp224.png">
+<p>kid, s#%t, butt</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: language use (en)
+<img height="500" data-src="img/wordle-en_tp043.png">
+<p>thine, thou, art</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Importing texts into Mallet (Windows)
-```
-C:\Programs\mallet207\bin\mallet 
-import-dir 
---input C:\Users\[USER]\Desktop\krakow-mallet\data\docs-all 
---output C:\Users\[USER]\Desktop\krakow-mallet\data\docs-all.mallet 
---keep-sequence 
---remove-stopwords TRUE 
---stoplist-file C:\Users\[USER]\Desktop\krakow-mallet\data\stopwords\doyle-100.txt
-```
+## Finally
+* Topics that don't fit any of these categories
+<img height="500" data-src="img/wordle-en_tp043.png">
+<p>thine, thou, art</p>
 </script>
 </section>
+
+
+</section>
+<section>
 
 
 
 <section data-markdown>
 <script type="text/template">
-## (2) Build the topic model
-* tell the computer to run Mallet
-* tell Mallet to do some modeling (`train-topics`)
-* ...where the corpus file is (`--input`)
-* ...how many topics to model (`--num-topics`)
-* ...in which interval to optimize internal parameters (`--optimize-interval`)
-* ...how many iterations to use (`--num-iterations`)
-* ...how many words to display per topic (`--num-topic-words`)
-* ...path for words-by-topics (`--output-topic-keys`)
-* ...path for topics-per-doc (`--output-doc-topics`)
+# 3. Some reasons and consequences
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## (2) Build the topic model (Linux)
-```
-/home/[USER]/Programs/Mallet/bin/mallet 
-train-topics  
---input /home/[USER]/krakow-mallet/data/docs-all.mallet 
---num-topics 20 
---optimize-interval 50 
---num-iterations 500 
---num-top-words 20 
---output-topic-keys /home/[USER]/Desktop/krakow-mallet/models/docs-all/topics-with-words.txt 
---output-doc-topics /home/[USER]/Desktop/krakow-mallet/models/docs-all/topics-in-texts.txt 
---doc-topics-max 20
-```
+## Some reasons
+* Literary texts are non-expository (they talk about more than concepts and theories)
+* Implicit / symbolic instead of explicit (topic modeling sees everything as explicit, misses implicit things)
+* Literary texts have background and foreground information (topic modeling doesn't distinguish these) 
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## (2) Build the topic model (Windows)
-```
-C:\\[USER]\Programs\mallet207\bin\mallet 
-train-topics 
---input C:\\Users\[USER]\krakow-mallet\data\docs-all.mallet 
---num-topics 20 
---optimize-interval 50 
---num-iterations 500 
---num-top-words 20 
---output-topic-keys C:\\Users\[USER]\krakow-mallet\models\docs-all\topics-with-words.txt 
---output-doc-topics C:\\Users\[USER]\krakow-mallet\models\docs-all\topics-in-texts.txt 
---doc-topics-max 20
-```
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Inspecting the results
-* Open the `topics-with-words.txt` file with Notepad++ or Calc/Excel (rename to CSV if necessary)
-* Open the `topics-in-texts.txt` file with Notepad++ or Calc/Excel (rename to CSV if necessary)
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## 3.3 Practice
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Preparation
-* Open gedit / notepad++ and save a new file called "mallet-commands.txt"
-* Find the Mallet installation folder on your computer and copy the path into your text file
-* Find the "krakow-mallet" folder on your computer and copy the path into your text file
-* Copy the generic `import` and `train-topic` commands from the presentation into your text file
-* Now you're all set!
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Exercise 1: Import and model
-* Build the `import` and `train-topic` commands for your system
-* Use the `import` comand and make sure the right `*.mallet` corpus appears
-* Use the `train-topics` command and make sure the output files appear
-* Inspect the results; do you get nice topics?
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Exercise 2: Adapt the commands
-* At your choice, do *one* of the following 
-    * Use a collection that has been preprocessed differently (change output folder!)
-    * Activate or deactivate one of the stopwords list
-    * Use a larger or smaller number of topics
-    * Perform fewer or more iterations
-    * Display more or less topic words
-* Make sure the output is written to a new folder / new filenames
-* Inspect the results and write down any changes you notice
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Exercise 3: Increasing iterations
-* Use any collection of your choice
-* Make a series of runs with 1, 5, 25, 100 iterations 
-* Make sure the results are written to a new file each time
-* Inspect the series of results and write down any changes you notice
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## 3.4. Using tmw (demonstration)
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## tmw
-<img height="500" data-src="img/tm_tmw_en.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## twm has four submodules
-* prepare: Preprocessing of the texts
-* model: run Mallet to train the model
-* postprocess: transform and enrich Mallet output
-* visualize: create graphical views of the data
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## tmw: Mallet and Python
-* MALLET = Machine Learning for Language Toolkit, https://github.com/mimno/Mallet
-* Python = Programming Language, https://www.python.org/
-* tmw = Topic Modeling Workflow, in Python https://github.com/cligs/tmw
-* tmw = modular functions + configuration file
-* tmw uses numpy, pandas, seaborn, matplotlib, wordcloud, lxml, subprocess, etc. 
+## Some consequences
+* In literary studies, we should not equate topics with themes
+* This doesn't mean topic modeling doesn't work in literary studies
+* Topic modeling opens up other aspects of literary texts to quantitative analysis as well
+* Literary studies are well-equipped to analyse these things and differentiate types of topics
+* In fact, we could go back to non-expository prose and ask for rhetorical / meta-topics there as well! (feedback-loop from humanities to sciences!)
 </script>
 </section>
 
@@ -793,28 +416,71 @@ train-topics
 
 <section data-markdown>
 <script type="text/template">
-# Conclusion</h2>
+# 4. First analyses (proof of concept)
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Further Reading: Theory and Tutorials
+## Formal, distinguishing characteristics?
+* Overall probability in the model (absolute / rank)
+* Coherence score (several measures; absolute / rank)
+* Skewness and kurtosis of word probabilities in topic
+* Proportions of nouns, verbs and adjectives
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Topics with classes and features
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Results from classification experiments
+</script>
+</section>
+
+
+
+</section>
+<section>
+
+<section data-markdown>
+<script type="text/template">
+# 6. Conclusion
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+# Next steps
+* Build a more systematic, theoretically-founded typology
+* Make larger models and crowdsource the classification of topics
+* Generate more features: WordNet categories; distributional characteristics; etc.
+* Use more sophisticated classifiers: Random Forests, Support Vector Machines
+</script>
+</section>
+
+
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Further Reading: Theory and Applications
+<small>
 * Blei, D. M. (2012). "Probabilistic topic models". In: _Communications of the ACM_, 55(4): 77–84. <http://www.cs.princeton.edu/~blei/papers/Blei2012.pdf>
 * Steyvers, M. and Griffiths, T. (2006). "Probabilistic Topic Models". In: Landauer, T. et al. (eds), _Latent Semantic Analysis: A Road to Meaning_. Laurence Erlbaum.
-* Weingart, S. (2012). "Topic Modeling for Humanists: A Guided Tour". In: _The Scottbot Irregular_. <http://www.scottbot.net/HIAL/?p=19113>
-* Riddell, Allen. (2014). "TAToM: Text Analysis with Topic Modeling for Humanities Scholars". In: _DARIAH-DE Schulungsmaterialien_. <https://de.dariah.eu/tatom/>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Further Reading: Applications
 * Blevins, C. (2010). "Topic Modeling Martha Ballard’s Diary". In: _Historying_. <http://historying.org/2010/04/01/topic-modeling-martha-ballards-diary/>
 * Jockers, M. L. (2013). _Macroanalysis - Digital Methods and Literary History_. Champaign, IL: University of Illinois Press.
 * Rhody, L. M. (2012). "Topic Modeling and Figurative Language". In: _Journal of Digital Humanities_, 2(1). <http://journalofdigitalhumanities.org/2-1/topic-modeling-and-figurative-language-by-lisa-m-rhody/>
 * Schöch, C. (2016, to appear). "Topic Modeling Genre: An Exploration of French Classical and Enlightenment Drama". In: _Digital Humanities Quarterly_. <http://digitalhumanities.org/dhq/>
-* Underwood, T. and Goldstone, A. (2012)." "What can topic models of PMLA teach us about the history of literary scholarship?" In: _The Stone and the Shell_. <http://tedunderwood.com/2012/12/14/what-can-topic-models-of-pmla-teach-us-about-the-history-of-literary-scholarship/>
+* Underwood, Ted (2012). "What kinds of topics does topic modeling actually produce?", In: _The Stone and the Shell_. <http://tedunderwood.com/2012/04/01/what-kinds-of-topics-does-topic-modeling-actually-produce/>
+* Underwood, T. and Goldstone, A. (2012). "What can topic models of PMLA teach us about the history of literary scholarship?" In: _The Stone and the Shell_. <http://tedunderwood.com/2012/12/14/what-can-topic-models-of-pmla-teach-us-about-the-history-of-literary-scholarship/>
+
+</small>
 </script>
 </section>
 
@@ -827,11 +493,11 @@ train-topics
 <br/>
 <br/>
 <br/>
-<p>Autor: Christof Schöch, 2016</p>
-<p><a href="http://www.christof-schoech.de">christof-schoech.de</a>
+<p>Author: Christof Schöch, 2016</p>
+<p><http://www.christof-schoech.de/en>
 <hr/>
-<p>Lizenz: Creative Commons Attribution 4.0 International</p>
-<p><a href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org/licenses/by/4.0/</a></p>
+<p>License: Creative Commons Attribution 4.0 International</p>
+<p><https://creativecommons.org/licenses/by/4.0/></p>
 </script>
 </section>
 
