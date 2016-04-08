@@ -71,12 +71,21 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## What was topic modeling again?
-* A method of discovering the latent semantic structure of large collections of texts <!-- .element: class="fragment" data-fragment-index="2" -->
+* A method of discovering the latent semantic structure of large collections of texts <!-- .element: class="fragment" data-fragment-index="1" -->
 * Unsupervised, language-independent, based on distributional semantics <!-- .element: class="fragment" data-fragment-index="2" -->
 * A topic model describes a set of topics with their words and their distribution in the collection <!-- .element: class="fragment" data-fragment-index="3" -->
 * Useful e.g. for resource discovery, recommender systems and thematic analysis <!-- .element: class="fragment" data-fragment-index="4" -->
 </script>
 </section>
+
+<section data-markdown>
+<script type="text/template">
+## Words, documents, topics
+<img height="500" data-src="img/tm_blei.png">
+<p>(David Blei, "Introduction to Probabilistic Topic Modeling", 2012)</p>
+</script>
+</section>
+
 
 <section data-markdown>
 <script type="text/template">
@@ -171,64 +180,59 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <br/>
 <table style="width:100%">
  <tr>
-  <td><strong>Language</strong></td>
-  <td><strong>Genre</strong></td>
+  <td><strong>Data</strong></td>
   <td><strong>Period</strong></td>
   <td><strong>Number</strong></td>
   <td><strong>Size</strong></td>
+  <td><strong>Preprocessing</strong></td>
+  <td><strong>Topics</strong></td>
  </tr>
  <tr>
-  <td>English</td>
-  <td>Novel</td>
+  <td>EN</td>
   <td>1780-2000</td>
   <td>507</td>
   <td>330MB</td>
+  <td>N,V,A</td>
+  <td>200</td>
 </tr>
  <tr>
-  <td>French</td>
-  <td>Novel</td>
+  <td>FR</td>
   <td>1850-2000</td>
   <td>740</td>
   <td>360MB</td>
+  <td>N only</td>
+  <td>240</td>
 </tr>
 </table> 
-<p>Modeling parameters: segments of 1000 words; lemmatisation; selection of nouns resp. nouns, verbs and adjectives; short stoplist)</p>
+<br/>
+<p>Parameters: 1000-word segments; lemmatisation; <br/>POS-selection; short stoplist</p>
+<p>All analyses done with Mallet via tmw <br/>(<https://github.com/cligs/tmw>)</p>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
 ## Types of topics: requirements
-* Types should not be defined based on meaning (not, e.g.: nature vs. culture topics)
-* Types should not be defined based on word categories (not, e.g. noun vs. verb topics
-* A useful basis could be the narrative function of the topics
+* Types should not be defined based on meaning (not, e.g.: nature vs. culture topics) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Types should not be defined based on word categories (not, e.g. noun vs. verb topics <!-- .element: class="fragment" data-fragment-index="2" -->
+* A useful basis could be the narrative function of the topics: narrative, descriptive, argumentative, discursive, <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
 ## Types of topics
-* Descriptive / referential topics
-    * Setting description (interiors, exteriors, landscapes) 
-    * Describing characters (physical appearance: body, clothes)
-    * Naming personnel (relational terms; character names)
-* Narrative topics
-    * Narrative motives (recurring narrative elements)
-* Argumentative topics
-    * Abstract themes (political, philosophical) 
-    * Meta-motives (arts, writing, story-telling)
-* Discourse-topics
-    * Language use (register, sociolect, dialect, foreign language)
-    * ?Rhetoric devices
-* Other types
-    * time
+* Descriptive: setting, physical, personnel <!-- .element: class="fragment" data-fragment-index="1" -->
+* Narrative: motives, ?affects <!-- .element: class="fragment" data-fragment-index="2" -->
+* Argumentative: abstract, ?meta <!-- .element: class="fragment" data-fragment-index="3" -->
+* Discursive: language, ?rhetorics <!-- .element: class="fragment" data-fragment-index="4" -->
+* Other: other <!-- .element: class="fragment" data-fragment-index="5" -->
 </script>
 </section>
 
-
 <section data-markdown>
 <script type="text/template">
-## Type: personnel
+## Type: descriptive_personnel
 * Words describing characters in a functional or relational way (not just character names)
 * E.g. family members, social rank terms, professional types, etc.
 </script>
@@ -236,7 +240,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Example: personnel (fr)
+## Example: descriptive_personnel (fr)
 <img height="500" data-src="img/wordle-fr_tp196.png">
 <p>bishop, sire, serf</p>
 </script>
@@ -244,83 +248,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Example: Personnel (en)
-<img height="500" data-src="img/wordle-en_tp000.png">
-<p>family, father, son</p>
+## Example: descriptive_personnel (en)
+<img height="500" data-src="img/wordle-en_tp177.png">
+<p>lord, earl, lady</p>
 </script>
 </section>
-
-<section data-markdown>
-<script type="text/template">
-## Type: setting
-* Words describing fictional spaces in which events take place
-* E.g. interiors, exteriors, landscapes
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: setting (fr)
-<img height="500" data-src="img/wordle-fr_tp162.png">
-<p>bed, room, table</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: setting (en)
-<img height="500" data-src="img/wordle-en_tp008.png">
-<p>street, shop, town</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Type: narrative motive
-* Words used to describe some typical sequence of events in a given setting
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: Narrative motive (fr)
-<img height="500" data-src="img/wordle-fr_tp131.png">
-<p>doctor, doctor, sickness</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: Narrative motive (en)
-<img height="500" data-src="img/wordle-en_tp026.png">
-<p>read, letter, write, paper</p>
-</script>
-</section>
-
-
-<section data-markdown>
-<script type="text/template">
-## Type: abstract theme
-* Words used to discuss some philosophical, political or social theme
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: abstract theme (fr)
-<img height="500" data-src="img/wordle-fr_tp147.png">
-<p>memory, past, dream</p>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Example: abstract theme (en)
-<img height="500" data-src="img/wordle-en_tp010.png">
-<p>country, people, government</p>
-</script>
-</section>
-
 
 <section data-markdown>
 <script type="text/template">
@@ -340,21 +272,96 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## Example: physical description (en)
-<img height="500" data-src="img/wordle-en_tp028.png">
-<p>wear, hat, dress, black, white</p>
+<img height="500" data-src="img/wordle-en_tp066.png">
+<p>little, hand, hair, white, finger</p>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Type: language use
+## Type: descriptive_setting
+* Words describing fictional spaces in which events take place
+* E.g. interiors, exteriors, landscapes
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: descriptive_setting (fr)
+<img height="500" data-src="img/wordle-fr_tp162.png">
+<p>bed, room, table, window, room</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: descriptive_setting (en)
+<img height="500" data-src="img/wordle-en_tp197.png">
+<p>wood, tree, ground, leave</p>
+</script>
+</section>
+
+
+
+<section data-markdown>
+<script type="text/template">
+## Type: narrative_motive
+* Words used to describe some typical sequence of events involving characters in a given setting
+* E.g.: taking the train, reading/writing letters, walking in town
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: narrative_motive (fr)
+<img height="500" data-src="img/wordle-fr_tp131.png">
+<p>doctor, doctor, sickness</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: narrative_motive (en)
+<img height="500" data-src="img/wordle-en_tp168.png">
+<p>dinner, table, bread, eat, food </p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Type: argumentative_abstract
+* Words used to discuss some philosophical, political or social theme
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: abstract theme (fr)
+<img height="500" data-src="img/wordle-fr_tp147.png">
+<p>memory, past, dream</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: abstract theme (en)
+<img height="500" data-src="img/wordle-en_tp003.png">
+<p>life, live, death, die, world ('existence')</p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Type: discourse_language
 * Words belonging to a certain register, sociolect, dialect or another language
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Example: language use (fr)
+## Example: discourse_language (fr)
 <img height="500" data-src="img/wordle-fr_tp224.png">
 <p>kid, s#%t, butt</p>
 </script>
@@ -362,8 +369,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Example: language use (en)
-<img height="500" data-src="img/wordle-en_tp043.png">
+## Example: discourse_language (en)
+<img height="500" data-src="img/wordle-en_tp072.png">
 <p>thine, thou, art</p>
 </script>
 </section>
@@ -371,17 +378,44 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Finally
+## Finally: other_other
 * Topics that don't fit any of these categories
-<img height="500" data-src="img/wordle-en_tp043.png">
-<p>thine, thou, art</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: other_other (fr)
+<img height="500" data-src="img/wordle-fr_tp010.png">
+<p>face, corner, fist, old, shoulder</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Example: other_other (en)
+<img height="500" data-src="img/wordle-en_tp170.png">
+<p>more, dog, seem, realize, window</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Distribution of class1 labels (EN)
+<img height="600" data-src="img/class1.png">
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Distribution of class2 labels (EN)
+<img height="600" data-src="img/class2.png">
 </script>
 </section>
 
 
 </section>
 <section>
-
 
 
 <section data-markdown>
@@ -393,20 +427,20 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## Some reasons
-* Literary texts are non-expository (they talk about more than concepts and theories)
-* Implicit / symbolic instead of explicit (topic modeling sees everything as explicit, misses implicit things)
-* Literary texts have background and foreground information (topic modeling doesn't distinguish these) 
+* Literary texts are non-expository (they talk about more than concepts and theories) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Implicit / symbolic instead of explicit (topic modeling sees everything as explicit, misses implicit things) <!-- .element: class="fragment" data-fragment-index="2" -->
+* Literary texts have background and foreground information (topic modeling doesn't distinguish these)  <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
 ## Some consequences
-* In literary studies, we should not equate topics with themes
-* This doesn't mean topic modeling doesn't work in literary studies
-* Topic modeling opens up other aspects of literary texts to quantitative analysis as well
-* Literary studies are well-equipped to analyse these things and differentiate types of topics
-* In fact, we could go back to non-expository prose and ask for rhetorical / meta-topics there as well! (feedback-loop from humanities to sciences!)
+* Topics != themes <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topic modeling does work in literary studies <!-- .element: class="fragment" data-fragment-index="2" -->
+* Discovers more than themes <!-- .element: class="fragment" data-fragment-index="3" -->
+* Literary studies are well-equipped for this <!-- .element: class="fragment" data-fragment-index="4" -->
+* What about non-thematic topics in expository prose?  <!-- .element: class="fragment" data-fragment-index="5" -->
 </script>
 </section>
 
@@ -416,29 +450,85 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-# 4. First analyses (proof of concept)
+# 4. First analyses <br/>(proof of concept)
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Formal, distinguishing characteristics?
-* Overall probability in the model (absolute / rank)
-* Coherence score (several measures; absolute / rank)
+## Basic idea
+* If the typology is theoreticall well-founded,  <!-- .element: class="fragment" data-fragment-index="1" --> 
+* and, if the typology is perceptually helpful,  <!-- .element: class="fragment" data-fragment-index="2" -->
+* then, it should be possible to find formal characteristics distinctive of each type  <!-- .element: class="fragment" data-fragment-index="3" -->
+* and if they exist, automatic classification should work with high accuracy  <!-- .element: class="fragment" data-fragment-index="4" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Potentially useful features (implemented)
+* Overall probability in the model (score)<br/>Mallet output - average: 0.039  <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topic coherence scores (ca, cv, umass scores)<br/>using Palmetto - average: 0.20/0.44/-3.87  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Amount of nouns, verbs and adjectives (proportion) <br/>TreeTagger - average: 0.50/0.32/0.18  <!-- .element: class="fragment" data-fragment-index="3" -->
+
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Potentially useful features <br/>(not implemented)
 * Skewness and kurtosis of word probabilities in topic
-* Proportions of nouns, verbs and adjectives
+* WordNet categories and hierarchy level of words
+* Sentiment scores: mean and variance
+* (Not useful: topic words themselves: may work but do not generalize) 
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
 ## Topics with classes and features
+<img height="550" data-src="img/topics-classes-features2.png">
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
 ## Results from classification experiments
+(All classifiers from sklearn; 20x5-fold 90/10 cross-validation; 5/9 types)
+<br/>
+<table style="width:100%">
+ <tr>
+  <td><strong>Classifier</strong></td>
+  <td><strong>Accuracy (class1)</strong></td>
+  <td><strong>Accuracy (class2)</strong></td>
+ </tr>
+ <tr>
+  <td>Baseline</td>
+  <td>0.36</td>
+  <td>0.32</td>
+</tr>
+ <tr>
+  <td>Decision Trees</td>
+  <td>0.44</td>
+  <td></td>
+</tr>
+ <tr>
+  <td>SVM</td>
+  <td>0.40</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Naive Bayes</td>
+  <td>0.53</td>
+  <td></td>
+</tr>
+<tr>
+  <td>St. Gradient Descent</td>
+  <td>0.46</td>
+  <td></td>
+</tr>
+</table> 
 </script>
 </section>
 
@@ -455,11 +545,21 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-# Next steps
+## What have we found out?
+* Literary topics are (probably) special
+* Topics come in different types
+* It remains an open question whether different types of topics have formal, statistical characteristics
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Next steps
 * Build a more systematic, theoretically-founded typology
-* Make larger models and crowdsource the classification of topics
+* Use larger models and crowdsource the classification of topics
 * Generate more features: WordNet categories; distributional characteristics; etc.
-* Use more sophisticated classifiers: Random Forests, Support Vector Machines
+* Test the generalization of the resulting models across corpora
 </script>
 </section>
 
