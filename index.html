@@ -205,7 +205,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 </tr>
 </table> 
 <br/>
-<p>Parameters: 1000-word segments; lemmatisation; <br/>POS-selection; short stoplist</p>
+<p>Parameters: 1000-word segments; lemmatisation; <br/>POS-selection; short stoplist; 2000 iterations</p>
 <p>All analyses done with Mallet via tmw <br/>(<https://github.com/cligs/tmw>)</p>
 </script>
 </section>
@@ -470,18 +470,17 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 * Overall probability in the model (score)<br/>Mallet output - average: 0.039  <!-- .element: class="fragment" data-fragment-index="1" -->
 * Topic coherence scores (ca, cv, umass scores)<br/>using Palmetto - average: 0.20/0.44/-3.87  <!-- .element: class="fragment" data-fragment-index="2" -->
 * Amount of nouns, verbs and adjectives (proportion) <br/>TreeTagger - average: 0.50/0.32/0.18  <!-- .element: class="fragment" data-fragment-index="3" -->
-
+* Skewness, kurtosis, variance, stdev of word probabilities<br/>Python scipy  <!-- .element: class="fragment" data-fragment-index="4" -->
 
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Potentially useful features <br/>(not implemented)
-* Skewness and kurtosis of word probabilities in topic
+## Other features <br/>(not implemented)
 * WordNet categories and hierarchy level of words
 * Sentiment scores: mean and variance
-* (Not useful: topic words themselves: may work but do not generalize) 
+* Probably not useful: topic words themselves (may work but unlikely to generalize) 
 </script>
 </section>
 
@@ -494,39 +493,59 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Results from classification experiments
-(All classifiers from sklearn; 20x5-fold 90/10 cross-validation; 5/9 types)
+## Classification Accuracy
+(All classifiers from sklearn; 20x5-fold 90/10 cross-validation; 5/8 types)
 <br/>
 <table style="width:100%">
  <tr>
-  <td><strong>Classifier</strong></td>
-  <td><strong>Accuracy (class1)</strong></td>
-  <td><strong>Accuracy (class2)</strong></td>
+  <th><strong>Classifier</strong></th>
+  <td colspan="3" align="center"><strong>5 types</strong><br/>baseline 0.36</td>
+  <td colspan="3" align="center"><strong>8 types</strong><br/>baseline 0.31</td>
  </tr>
  <tr>
-  <td>Baseline</td>
-  <td>0.36</td>
-  <td>0.32</td>
-</tr>
- <tr>
-  <td>Decision Trees</td>
-  <td>0.44</td>
-  <td></td>
-</tr>
- <tr>
-  <td>SVM</td>
-  <td>0.40</td>
-  <td></td>
+  <td>Features</td>
+  <td>coh.</td>
+  <td>pos</td>
+  <td>all</td>
+  <td>coh.</td>
+  <td>pos</td>
+  <td>all</td>
 </tr>
 <tr>
   <td>Naive Bayes</td>
-  <td>0.53</td>
-  <td></td>
+  <td>0.37</td>
+  <td>0.39</td>
+  <td>0.26</td>
+  <td>0.27</td>
+  <td>0.32</td>
+  <td>0.23</td>
+</tr>
+<tr>
+  <td>Decision Trees</td>
+  <td>0.30</td>
+  <td>0.29</td>
+  <td>0.29</td>
+  <td>0.21</td>
+  <td>0.23</td>
+  <td>0.24</td>
+</tr>
+<tr>
+  <td>SVM</td>
+  <td>0.38</td>
+  <td>0.38</td>
+  <td>0.29</td>
+  <td>0.33</td>
+  <td>0.33</td>
+  <td>na</td>
 </tr>
 <tr>
   <td>St. Gradient Descent</td>
-  <td>0.46</td>
-  <td></td>
+  <td>0.26</td>
+  <td>0.29</td>
+  <td>0.29</td>
+  <td>0.17</td>
+  <td>0.21</td>
+  <td>0.17</td>
 </tr>
 </table> 
 </script>
@@ -546,9 +565,9 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## What have we found out?
-* Literary topics are (probably) special
-* Topics come in different types
-* It remains an open question whether different types of topics have formal, statistical characteristics
+* Literary topics are (probably) special  <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topics come in different types  <!-- .element: class="fragment" data-fragment-index="2" -->
+* It remains an open question whether different types of topics have formal, statistical characteristics  <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
@@ -556,10 +575,10 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## Next steps
-* Build a more systematic, theoretically-founded typology
-* Use larger models and crowdsource the classification of topics
-* Generate more features: WordNet categories; distributional characteristics; etc.
-* Test the generalization of the resulting models across corpora
+* Build a more systematic, theoretically-founded typology  <!-- .element: class="fragment" data-fragment-index="1" -->
+* Use larger models and crowdsource the classification of topics  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Generate more features: WordNet categories; distributional characteristics; etc.  <!-- .element: class="fragment" data-fragment-index="3" -->
+* Test the generalization of the resulting models across corpora  <!-- .element: class="fragment" data-fragment-index="4" -->
 </script>
 </section>
 
