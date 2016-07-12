@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- CUSTOMIZE THIS! -->
+<title>What are literary topics, really?</title>
+<meta name="author" content="Christof Schöch">
+<!-- END -->
+<meta name="description" content="Slides">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+<!--[if lt IE 9]>
+<script src="lib/js/html5shiv.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="reveal">
+<!-- THIS IS WHERE THE CONTENT GOES! -->
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+<section data-markdown>
+<script type="text/template">
+# Topic
+<br/>
+<hr/>
+<br/>
+<br/>
+<br/>
+<p>Digital Humanities Conference, Kraków, 2016</p>
+<br/>
+<hr/>
+<p>Christof Schöch<br/>(CLiGS, University of Würzburg)</p>
+<p><img height="50" data-src="img/basics/UWUE.jpg"></img>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img height="100" data-src="img/basics/CLiGS.jpg"></img>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img height="50" data-src="img/basics/BMBF.jpg"></img></p>
+</script>
+</section>
+
+
+
+<section>
+
+<section data-markdown>
+<script type="text/template">
+# Established approaches
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Established approaches
+* hermeneutics
+* thematic criticism
+* content analysis
+</script>
+</section>
+
+
+
+</section>
+<section>
+
+<section data-markdown>
+<script type="text/template">
+# Quantitative Approach
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Topic Modeling
+<br/>
+
+>"We formally define a topic to be a distribution over a fixed vocabulary."
+
+>"Probabilistic topic models are a suite of algorithms whose aim is to discover the hidden thematic structure in large archives of documents."
+
+<br/>
+<p>(David Blei 2012)</p> 
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Types of topics (a proposal)
+* Descriptive: setting, physical, personnel <!-- .element: class="fragment" data-fragment-index="1" -->
+* Narrative: motives, affects <!-- .element: class="fragment" data-fragment-index="2" -->
+* Argumentative: abstract, meta <!-- .element: class="fragment" data-fragment-index="3" -->
+* Discursive: language, rhetoric <!-- .element: class="fragment" data-fragment-index="4" -->
+* Other: OCR artefacts, other <!-- .element: class="fragment" data-fragment-index="5" -->
+<p>(Examples in the following from a topic model of 500 English novels, 1830-2000; lemmatization, POS-selection N,V,A, 200 topics)</p> <!-- .element: class="fragment" data-fragment-index="6" -->
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: descriptive > personnel
+* Words describing characters in a functional or relational way (not just character names)
+* E.g. family members, social rank terms, professional types, etc.
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: descriptive > personnel (en)
+<img height="500" data-src="img/wordle-en_tp177.png">
+<p>lord, earl, lady</p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: descriptive > physical
+* Words used to describe the body and/or clothes of a person
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: descriptive > physical (en)
+<img height="500" data-src="img/wordle-en_tp066.png">
+<p>little, hand, hair, white, finger</p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: descriptive > setting
+* Words describing fictional spaces in which events take place
+* E.g. interiors, exteriors, landscapes
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: descriptive > setting (en)
+<img height="500" data-src="img/wordle-en_tp197.png">
+<p>wood, tree, ground, leave</p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: narrative > motive
+* Words used to describe some typical sequence of events involving characters in a given setting
+* E.g.: taking the train, reading/writing letters, walking in town
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: narrative > motive (en)
+<img height="500" data-src="img/wordle-en_tp168.png">
+<p>dinner, table, bread, eat, food </p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: argumentative_abstract
+* Words used to discuss some philosophical, political or social theme
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: argumentative > abstract (en)
+<img height="500" data-src="img/wordle-en_tp003.png">
+<p>life, live, death, die, world ('existence')</p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Type: discourse > language
+* Words belonging to a certain register, sociolect, dialect or another language
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: discourse > language (en)
+<img height="500" data-src="img/wordle-en_tp072.png">
+<p>thine, thou, art</p>
+</script>
+</section>
+
+<!--
+<section data-markdown>
+<script type="text/template">
+## Finally: other_other
+* Topics that don't fit any of these categories
+</script>
+</section>
+-->
+
+<section data-markdown>
+<script type="text/template">
+## Example: other > other (en)
+<img height="500" data-src="img/wordle-en_tp170.png">
+<p>dog, seem, realize, window</p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Distribution of class1 labels (en)
+<img height="600" data-src="img/class1.png">
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Distribution of class2 labels (en)
+<img height="600" data-src="img/class2.png">
+</script>
+</section>
+
+
+</section>
+<section>
+
+
+<section data-markdown>
+<script type="text/template">
+# Take-away
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Some results
+* Topics are more diverse than often acknowledged <!-- .element: class="fragment" data-fragment-index="1" -->
+* A typology of topics is possible <!-- .element: class="fragment" data-fragment-index="2" -->
+* Option to suppress or amplify this multiplicity  <!-- .element: class="fragment" data-fragment-index="3" -->
+* Topic Modeling literary texts has enriched what topics can be  <!-- .element: class="fragment" data-fragment-index="4" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Reasons: literary texts are special
+* Literary texts are non-expository (enact rather than discuss concepts) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Implicit / symbolic instead of explicit (topic modeling sees everything as explicit, misses implicit things) <!-- .element: class="fragment" data-fragment-index="2" -->
+* Literary texts have background and foreground information (topic modeling doesn't distinguish these)  <!-- .element: class="fragment" data-fragment-index="3" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Some consequences
+* Topic modeling does work in literary studies <!-- .element: class="fragment" data-fragment-index="1" -->
+* Literary studies are well-equipped for dealing with topic multiplicity <!-- .element: class="fragment" data-fragment-index="2" -->
+* Next steps: What about non-thematic topics in expository prose?  <!-- .element: class="fragment" data-fragment-index="3" -->
+* Next steps: empirically test typologies <!-- .element: class="fragment" data-fragment-index="4" -->
+</script>
+</section>
+
+
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+<br/>
+#Thank you!
+<br/>
+<br/>
+<br/>
+<p>Christof Schöch, 2016</p>
+<p><http://www.christof-schoech.de/en>
+<hr/>
+<p>License: Creative Commons Attribution 4.0 International</p>
+<p><https://creativecommons.org/licenses/by/4.0/></p>
+</script>
+</section>
+
+
+
+<!-- DON'T TOUCH UNLESS YOU KNOW WHAT YOU'RE DOING :-) -->
+</div>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+<script>
+// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	// Optional reveal.js plugins
+	dependencies: [
+		{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: 'plugin/zoom-js/zoom.js', async: true },
+		{ src: 'plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>
